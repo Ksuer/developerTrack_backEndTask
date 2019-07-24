@@ -3,6 +3,7 @@ import './App.css';
 import Header from './Header.js'
 import image from './head.jpg';
 import logo from './cv_logo.png';
+import axios from 'axios';
 
 function App() {
   return (
@@ -38,14 +39,44 @@ function App() {
 		  Major:
 		  <input type="text" name="major"/><br/>
 		  
+		  <input type="file" class="form-control" multiple="">
+
 		</form>
 
-		<button type="button">Upload Your CV</button>
+		<button type="button" class="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button> 
+
 
         </a>
       </header>
 	
     </div>
+	
+	onChangeHandler=event=>{
+
+    console.log(event.target.files[0])
+
+	}
+	
+	constructor(props) {
+    super(props);
+      this.state = {
+        selectedFile: null
+      }
+   
+	}
+	
+	onChangeHandler=event=>{
+    this.setState({
+      selectedFile: event.target.files[0],
+      loaded: 0,
+    })
+   }
+   
+   onClickHandler = () => {
+    const data = new FormData() 
+    data.append('file', this.state.selectedFile)
+	}
+	
 	
 	
   );
